@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Regex-ing
-"""
+"""Regex-ing"""
 import re
 
 
