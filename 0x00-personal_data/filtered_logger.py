@@ -16,14 +16,10 @@ import re
 #                              message)
 #     return message
 
-def filter_datum(
-        fields: list,
-        redaction: str,
-        message: str,
-        separator: str) -> str:
+import re
+
+def filter_datum(fields: list, redaction: str, message: str, separator: str) -> str:
     """filter_datum that returns the log message obfuscated"""
-    return re.sub(
-        '|'.join(
-            f'{field}=.*?{separator}' for field in fields),
-        lambda match: f'{match.group().split("=")[0]}={redaction}{separator}',
-        message)
+    return re.sub('|'.join(f'{field}=.*?{separator}' for field in fields), 
+                  lambda match: f'{match.group().split("=")[0]}={redaction}{separator}', 
+                  message)
