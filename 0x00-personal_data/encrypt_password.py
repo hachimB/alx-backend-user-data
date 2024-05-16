@@ -9,4 +9,3 @@ def hash_password(password: str) -> bytes:
     salt = gensalt()
     hashed = hashpw(byte, salt)
     return hashed
-
