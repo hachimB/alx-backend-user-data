@@ -11,8 +11,8 @@ import re
 #                           .format(field, redaction, separator), message))
 #     return message
 
-def filter_datum(fields, redaction, message, separator):
-    """Returns the log message obfuscated"""
-    return re.sub(rf"({'|'.join(fields)})=.*?{re.escape(separator)}",
-                  rf"\1={redaction}{separator}",
-                  message)
+# def filter_datum(fields, redaction, message, separator):
+#     """Returns the log message obfuscated"""
+#     return re.sub(rf"({'|'.join(fields)})=.*?{re.escape(separator)}",
+#                   rf"\1={redaction}{separator}",
+#                   message)
