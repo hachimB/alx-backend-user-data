@@ -51,16 +51,5 @@ def get_logger() -> logging.Logger:
     return user_data
 
 
-def get_db() -> MySQLConnection:
+def get_db():
     """get_db"""
-    # try:
-    #     conn = connect(
-    #         database=os.getenv('PERSONAL_DATA_DB_NAME'),
-    #         host=os.getenv('PERSONAL_DATA_DB_HOST'),
-    #         user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
-    #         password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
-    #         )
-    #     return conn
-    # except Error as e:
-    #     print("Error while connecting to MySQL using Connection object:", e)
-    #     return None

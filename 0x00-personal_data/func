@@ -1,4 +1,10 @@
 import re
+from typing import List
+import logging
+from mysql.connector import Error, connect
+from mysql.connector.connection import MySQLConnection
+import os
+
 def filter_datum(fields: list, redaction: str, message: str,
                  separator: str) -> str:
     """filter_datum that returns the log message obfuscated"""
@@ -7,8 +13,17 @@ def filter_datum(fields: list, redaction: str, message: str,
                           .format(field, redaction, separator), message))
     return message
 
-def filter_datum(fields, redaction, message, separator):
-    """Returns the log message obfuscated"""
-    return re.sub(rf"({'|'.join(fields)})=.*?{re.escape(separator)}",
-                  rf"\1={redaction}{separator}",
-                  message)
+
+def get_db() -> MySQLConnection:
+    """get_db"""
+    try:
+        conn = connect(
+            database=os.getenv('PERSONAL_DATA_DB_NAME'),
+            host=os.getenv('PERSONAL_DATA_DB_HOST'),
+            user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
+            password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
+            )
+        return conn
+    except Error as e:
+        print("Error while connecting to MySQL using Connection object:", e)
+        return None
