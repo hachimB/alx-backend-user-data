@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Encrypting passwords"""
-from bcrypt import gensalt, hashpw
+from bcrypt import gensalt, hashpw, checkpw
 
 
 def hash_password(password: str) -> bytes:
@@ -14,4 +14,4 @@ def hash_password(password: str) -> bytes:
 def is_valid(hashed_password: bytes, password: str) -> bool:
     """Check valid password"""
     provided_passwd = password.encode('utf-8')
-    return hashpw(provided_passwd, hashed_password) == hashed_password
+    return checkpw(provided_passwd, hashed_password)
