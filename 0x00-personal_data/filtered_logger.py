@@ -64,5 +64,3 @@ def get_db() -> MySQLConnection:
     except Error as e:
         print("Error while connecting to MySQL using Connection object:", e)
         return None
-
-
