@@ -3,7 +3,7 @@
 import re
 from typing import List
 import logging
-from mysql.connector import Error
+from mysql.connector import Error, connect
 from mysql.connector.connection import MySQLConnection
 import os
 
@@ -53,14 +53,14 @@ def get_logger() -> logging.Logger:
 
 def get_db() -> MySQLConnection:
     """get_db"""
-    # try:
-    #     conn = MySQLConnection(
-    #         database=os.getenv('PERSONAL_DATA_DB_NAME'),
-    #         host=os.getenv('PERSONAL_DATA_DB_HOST'),
-    #         user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
-    #         password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
-    #         )
-    #     return conn
-    # except Error as e:
-    #     print("Error while connecting to MySQL using Connection object:", e)
-    #     return None
+    try:
+        conn = connect(
+            database=os.getenv('PERSONAL_DATA_DB_NAME'),
+            host=os.getenv('PERSONAL_DATA_DB_HOST'),
+            user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
+            password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
+            )
+        return conn
+    except Error as e:
+        print("Error while connecting to MySQL using Connection object:", e)
+        return None
