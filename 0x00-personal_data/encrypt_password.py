@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Encrypting passwords"""
-from bcrypt import gensalt, hashpw
+from bcrypt import gensalt, hashpw # type: ignore
 
 
 def hash_password(password: str) -> bytes:
