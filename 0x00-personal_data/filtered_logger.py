@@ -5,7 +5,7 @@ from typing import List
 import logging
 
 
-PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+# PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
@@ -15,6 +15,9 @@ def filter_datum(fields: List[str], redaction: str, message: str,
         message = (re.sub(r'{}=.*?{}'.format(field, separator), '{}={}{}'
                           .format(field, redaction, separator), message))
     return message
+
+
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 class RedactingFormatter(logging.Formatter):
