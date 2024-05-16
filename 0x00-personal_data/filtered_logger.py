@@ -1,5 +1,4 @@
-#!/bin/usr/env python3
-"""Module documentation"""
+#!/usr/bin/env python3
 # import re
 
 
