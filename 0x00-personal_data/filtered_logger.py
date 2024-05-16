@@ -55,10 +55,10 @@ def get_db() -> MySQLConnection:
     """get_db"""
     try:
         conn = MySQLConnection(
-            database=os.getenv('PERSONAL_DATA_DB_NAME'),
-            host=os.getenv('PERSONAL_DATA_DB_HOST'),
-            user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
-            password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
+            database=os.getenv('PERSONAL_DATA_DB_NAME', 'my_db'),
+            host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+            user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+            password=os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
             )
         return conn
     except Error as e:
