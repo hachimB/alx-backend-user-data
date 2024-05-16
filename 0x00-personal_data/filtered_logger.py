@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Module documentation"""
-import re
+# import re
 
 
 # def filter_datum(fields: list, redaction: str, message: str,
