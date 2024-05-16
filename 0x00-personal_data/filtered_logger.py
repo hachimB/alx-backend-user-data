@@ -50,7 +50,7 @@ def get_logger() -> logging.Logger:
     return user_data
 
 
-def get_db() -> Optional[MySQLConnection]:
+def get_db() -> MySQLConnection:
     """get_db"""
     conn = MySQLConnection(
         db=os.getenv('PERSONAL_DATA_DB_NAME'),
