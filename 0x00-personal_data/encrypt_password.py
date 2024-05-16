@@ -8,4 +8,4 @@ def hash_password(password: str) -> bytes:
     byte = password.encode('utf-8')
     salt = gensalt()
     hashed = hashpw(byte, salt)
-    return hashed
+    return bytes(hashed)
