@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Module documentation"""
 import re
-from typing import List, Optional
+from typing import List
 import logging
 from mysql.connector import Error
 from mysql.connector.connection import MySQLConnection
