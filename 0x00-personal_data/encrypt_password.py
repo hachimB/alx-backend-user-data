@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Encrypting passwords"""
-from bcrypt import gensalt, hashpw, checkpw
+from bcrypt import gensalt, hashpw
 
 
 def hash_password(password: str) -> bytes:
@@ -8,5 +8,4 @@ def hash_password(password: str) -> bytes:
     byte = password.encode('utf-8')
     salt = gensalt()
     hashed = hashpw(byte, salt)
-    if checkpw(byte, hashed):
-        return hashed
+    return hashed
