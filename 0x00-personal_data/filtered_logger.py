@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Module documentation"""
 import re
-from typing import List
+from typing import List, Optional
 import logging
-
+from mysql.connector.connection import MySQLConnection
+import os
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -47,3 +48,14 @@ def get_logger() -> logging.Logger:
     stream_handler.setFormatter(formatter)
     user_data.addHandler(stream_handler)
     return user_data
+
+
+def get_db() -> Optional[MySQLConnection]:
+    """get_db"""
+    conn = MySQLConnection(
+        db=os.getenv('PERSONAL_DATA_DB_NAME'),
+        host=os.getenv('PERSONAL_DATA_DB_HOST'),
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD')
+    )
+    return conn
