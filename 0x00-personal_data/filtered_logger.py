@@ -4,6 +4,7 @@ import re
 from typing import List
 import logging
 import mysql.connector
+from mysql.connector import Error
 from mysql.connector.connection import MySQLConnection
 import os
 
@@ -51,17 +52,32 @@ def get_logger() -> logging.Logger:
     return user_data
 
 
-def get_db() -> MySQLConnection:
-    """get_db function"""
-    db_host = os.getenv('PERSONAL_DATA_DB_HOST')
-    db_user = os.getenv('PERSONAL_DATA_DB_USERNAME')
-    db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD')
-    db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+def get_db():
+    """
+    Returns a connection to the MySQL database.
 
-    connection = mysql.connector.connect(
-        host=db_host,
-        user=db_user,
-        password=db_password,
-        database=db_name
-    )
-    return connection
+    Assumes environment variables are set:
+    - PERSONAL_DATA_DB_USERNAME (default: "root")
+    - PERSONAL_DATA_DB_PASSWORD (default: empty string)
+    - PERSONAL_DATA_DB_HOST (default: "localhost")
+    - PERSONAL_DATA_DB_NAME (database name)
+
+    Returns:
+        mysql.connector.connection.MySQLConnection: Database connection object
+    """
+    try:
+        username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+        password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+        host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+        db_name = os.getenv("PERSONAL_DATA_DB_NAME")
+
+        connection = mysql.connector.connect(
+            host=host,
+            user=username,
+            passwd=password,
+            database=db_name
+        )
+        return connection
+    except Error as e:
+        print(f"The error '{e}' occurred")
+        return None
