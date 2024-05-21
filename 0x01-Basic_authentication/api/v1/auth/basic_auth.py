@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Basic auth"""
 from .auth import Auth
-from typing import Tuple
+from typing import Tuple, TypeVar, Optional
 from flask import request
 import base64
 from models.base import Base
@@ -48,7 +48,7 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self,
             user_email: str,
-            user_pwd: str):
+            user_pwd: str) -> Optional[User]:
         """user_object_from_credentials"""
         if user_email is None or not isinstance(user_email, str):
             return None
