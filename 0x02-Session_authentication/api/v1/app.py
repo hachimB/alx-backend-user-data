@@ -25,6 +25,13 @@ else:
     from api.v1.auth.auth import Auth
     auth = Auth()
 
+if  getenv('AUTH_TYPE') == 'session_auth':
+    SessionAuth = getattr(import_module("api.v1.auth.session_auth"), 'SessionAuth')
+    auth = SessionAuth()
+else:
+    from api.v1.auth.auth import Auth
+    auth = Auth()
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
