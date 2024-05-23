@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Session authentication"""
 from api.v1.auth.auth import Auth
+from models.user import User
 import uuid
 
 
@@ -25,4 +26,7 @@ class SessionAuth(Auth):
     def current_user(self, request=None):
         """current_user function"""
         _my_session_id = self.session_cookie(request)
-        return self.user_id_for_session_id(_my_session_id)
+        user_id = self.user_id_for_session_id(_my_session_id)
+        if user_id is None:
+            return None
+        return User.get(user_id)
