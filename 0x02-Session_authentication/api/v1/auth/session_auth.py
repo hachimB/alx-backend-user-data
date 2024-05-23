@@ -22,3 +22,10 @@ class SessionAuth(Auth):
             return None
         return SessionAuth.user_id_by_session_id.get(session_id)
 
+    def current_user(self, request=None):
+        """current_user function"""
+        try:
+            _my_session_id = self.session_cookie(request)
+            return self.user_id_for_session_id(_my_session_id)
+        except Exception:
+            return None
