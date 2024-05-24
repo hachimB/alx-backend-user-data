@@ -7,7 +7,7 @@ import os
 
 session_auth_views = Blueprint("session_auth_views", __name__, url_prefix="/api/v1")
 
-@session_auth_views.route('/login', methods=['POST'], strict_slashes = False)
+@session_auth_views.route('/auth_session/login', methods=['POST'], strict_slashes = False)
 def login():
     """login route"""
     email = request.form.get('email')
