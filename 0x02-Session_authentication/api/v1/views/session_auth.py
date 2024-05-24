@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""session authentication"""
+"""Documentation:
+session authentication"""
 from flask import Blueprint, request, jsonify, make_response
 from api.v1.views.users import User
 import os
