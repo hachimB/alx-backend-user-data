@@ -3,7 +3,7 @@
 session authentication"""
 from flask import Blueprint, request, jsonify, make_response, abort
 from api.v1.views.users import User
-from api.v1.app import auth
+# from api.v1.app import auth
 import os
 
 
@@ -41,9 +41,10 @@ def login():
 
 
 @session_auth_views.route('/auth_session/logout',
-                          method=['DELETE'], strict_slashes=False)
+                          methods=['DELETE'], strict_slashes=False)
 def logout():
     """Documentation for logout"""
+    from api.v1.app import auth
     if not auth.destroy_session(request):
         abort(404)
     return jsonify({}), 200
