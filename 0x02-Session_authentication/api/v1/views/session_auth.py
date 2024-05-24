@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Documentation:
 session authentication"""
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, abort
 from api.v1.views.users import User
+from api.v1.app import auth
 import os
 
 
@@ -37,3 +38,12 @@ def login():
     response.set_cookie(os.getenv('SESSION_NAME'), session_id)
 
     return response
+
+
+@session_auth_views.route('/auth_session/logout',
+                          method=['DELETE'], strict_slashes=False)
+def logout():
+    """Documentation for logout"""
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({}), 200

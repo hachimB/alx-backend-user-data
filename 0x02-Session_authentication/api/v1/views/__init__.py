@@ -10,5 +10,3 @@ from api.v1.views.users import *
 from api.v1.views.session_auth import session_auth_views
 
 User.load_from_file()
-
-from flask import current_app
