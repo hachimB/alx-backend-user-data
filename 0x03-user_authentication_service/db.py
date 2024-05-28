@@ -8,7 +8,6 @@ from sqlalchemy.orm.session import Session
 
 from user import Base
 from user import User
-import bcrypt
 
 
 class DB:
@@ -32,7 +31,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> sqlalchemy.orm.decl_api.DeclarativeMeta:
+    def add_user(self, email: str, hashed_password: str) -> User:
         """add a user"""
         n_user = User(email=email, hashed_password=hashed_password)
         self._session.add(n_user)
