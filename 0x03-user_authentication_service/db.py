@@ -41,10 +41,10 @@ class DB:
         self._session.commit()
         return n_user
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs: Any) -> User:
         """find a user"""
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
+            user = self._session.query(User).filter_by(**kwargs).one()
             return user
         except NoResultFound:
             raise NoResultFound
