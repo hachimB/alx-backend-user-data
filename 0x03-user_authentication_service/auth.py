@@ -15,6 +15,7 @@ class Auth:
     """
 
     def __init__(self):
+        """init constructor"""
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
@@ -24,9 +25,9 @@ class Auth:
         if user_email:
             raise ValueError(f"User {email} already exists")
         else:
-            user = User()
-            user.email = email
-            user.hashed_password = _hash_password(password)
-            self._db._session.add(user)
+            user = User(email=email, hashed_password=_hash_password(password))
+            # user.email = email
+            # user.hashed_password = _hash_password(password)
+            self._db._session.add(user) 
             self._db._session.commit()
             return user
