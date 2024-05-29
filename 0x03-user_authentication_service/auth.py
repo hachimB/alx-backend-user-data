@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Module documentation"""
+from user import User
 import bcrypt
 from db import DB
 from sqlalchemy.orm.exc import NoResultFound
