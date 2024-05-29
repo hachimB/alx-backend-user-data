@@ -50,8 +50,8 @@ class Auth:
         """create session"""
         try:
             user = self._db.find_user_by(email=email)
-            session_id = _generate_uuid()
+            session_id = self._generate_uuid()
             user.session_id = session_id
-            return user.session_id
+            return session_id
         except NoResultFound:
             return None
