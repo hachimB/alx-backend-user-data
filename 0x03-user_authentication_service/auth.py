@@ -20,13 +20,12 @@ class Auth:
 
     def register_user(self, email: str, password: str) -> User:
         """Register a user"""
-        # user_email = self._db._session.query(
-        #     User).filter_by(email=email).first()
-        user = User(email=email, hashed_password=_hash_password(password))
-        if user:
+        user_email = self._db._session.query(
+            User).filter_by(email=email).first()
+        if user_email:
             raise ValueError(f"User {email} already exists")
         else:
-            # user = User(email=email, hashed_password=_hash_password(password))
+            user = User(email=email, hashed_password=_hash_password(password))
             # user.email = email
             # user.hashed_password = _hash_password(password)
             self._db._session.add(user)
