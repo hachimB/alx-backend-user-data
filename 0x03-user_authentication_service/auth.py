@@ -28,6 +28,6 @@ class Auth:
             user = User(email=email, hashed_password=_hash_password(password))
             # user.email = email
             # user.hashed_password = _hash_password(password)
-            self._db._session.add(user)
+            self._db.add_user(user.email, user.hashed_password)
             self._db._session.commit()
             return user
