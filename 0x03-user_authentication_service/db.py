@@ -63,15 +63,3 @@ class DB:
             self._session.commit()
         except NoResultFound:
             raise ValueError
-        # try:
-        #     user = self.find_user_by(id=user_id)
-        # except NoResultFound:
-        #     raise ValueError()
-
-        # for key, value in kwargs.items():
-        #     if hasattr(user, key):
-        #         setattr(user, key, value)
-        #     else:
-        #         raise ValueError
-        # self._session.commit()
-        # return None
