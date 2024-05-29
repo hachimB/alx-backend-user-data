@@ -86,18 +86,7 @@ class Auth:
                 try:
                     self._db.update_user(user.id, reset_token=token)
                     return token
-                except ValueError as e:
-                    print(f"Error updating user: {e}")
-                    raise
+                except ValueError:
+                    raise ValueError
         except NoResultFound:
             raise ValueError
-        # try:
-        #     user = self._db.find_user_by(email=email)
-        #     if user:
-        #         token = _generate_uuid()
-        #         self._db.update_user(user.id, reset_token=token)
-        #         return token
-        # except NoResultFound:
-        #     raise ValueError
-        # except ValueError:
-        #     raise ValueError
