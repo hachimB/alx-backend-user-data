@@ -100,3 +100,5 @@ class Auth:
                 return token
         except NoResultFound:
             raise ValueError
+        except ValueError:
+            raise ValueError
