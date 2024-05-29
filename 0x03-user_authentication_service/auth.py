@@ -86,7 +86,7 @@ class Auth:
             else:
                 token = _generate_uuid()
                 try:
-                    self._db.update_user(user.id, reset_token=token)
+                    # self._db.update_user(user.id, reset_token=token)
                     return token
                 except ValueError:
                     raise ValueError
