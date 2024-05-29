@@ -79,26 +79,25 @@ class Auth:
 
     def get_reset_password_token(self, email: str):
         """method to get reset password token"""
-        # try:
-        #     user = self._db.find_user_by(email=email)
-        #     if not user:
-        #         raise ValueError
-        #     else:
-        #         token = _generate_uuid()
-        #         try:
-        #             self._db.update_user(user.id, reset_token=token)
-        #             return token
-        #         except ValueError as e:
-        #             raise ValueError from e
-        # except NoResultFound:
-        #     raise ValueError
         try:
             user = self._db.find_user_by(email=email)
             if user:
                 token = _generate_uuid()
-                self._db.update_user(user.id, reset_token=token)
-                return token
+                try:
+                    self._db.update_user(user.id, reset_token=token)
+                    return token
+                except ValueError as e:
+                    print(f"Error updating user: {e}")
+                    raise
         except NoResultFound:
             raise ValueError
-        except ValueError:
-            raise ValueError
+        # try:
+        #     user = self._db.find_user_by(email=email)
+        #     if user:
+        #         token = _generate_uuid()
+        #         self._db.update_user(user.id, reset_token=token)
+        #         return token
+        # except NoResultFound:
+        #     raise ValueError
+        # except ValueError:
+        #     raise ValueError
