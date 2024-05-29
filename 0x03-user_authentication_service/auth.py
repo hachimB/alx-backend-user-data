@@ -49,15 +49,24 @@ class Auth:
 
     def create_session(self, email: str) -> str:
         """method to create session"""
+        # try:
+        #     try:
+        #         user = self._db.find_user_by(email=email)
+        #         session_id = _generate_uuid()
+        #         self._db.update_user(user.id, session_id=session_id)
+        #         return session_id
+        #     except NoResultFound:
+        #         return None
+        # except ValueError:
+        #     return None
         try:
-            try:
-                user = self._db.find_user_by(email=email)
+            user = self._db.find_user_by(email=email)
+            if user:
                 session_id = _generate_uuid()
                 self._db.update_user(user.id, session_id=session_id)
-                return session_id
-            except NoResultFound:
-                return None
-        except ValueError:
+                return user.session_id
+            return None
+        except NoResultFound:
             return None
 
     def get_user_from_session_id(self, session_id: str):
