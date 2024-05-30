@@ -90,12 +90,9 @@ def update_password():
     if not email or not password or not reset_token:
         abort(403)
     try:
-        if AUTH.get_reset_password_token(email) == reset_token:
-            AUTH.update_password(email, password)
-            return jsonify(
-                {"email": f"{email}", "message": "Password updated"}), 200
-        else:
-            abort(403)
+        AUTH.update_password(reset_token, password)
+        return jsonify(
+            {"email": f"{email}", "message": "Password updated"}), 200
     except ValueError:
         abort(403)
 
