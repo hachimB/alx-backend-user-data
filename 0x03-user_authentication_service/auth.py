@@ -81,12 +81,12 @@ class Auth:
         """method to get reset password token"""
         try:
             user = self._db.find_user_by(email=email)
-            if user:
-                token = _generate_uuid()
-                try:
-                    self._db.update_user(user.id, reset_token=token)
-                    return token
-                except ValueError:
-                    raise ValueError
         except NoResultFound:
             raise ValueError
+        if user:
+            token = _generate_uuid()
+        try:
+            self._db.update_user(user.id, reset_token=token)
+        except ValueError:
+            raise ValueError
+        return token
